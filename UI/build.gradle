@@ -1,0 +1,64 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.+'
+    compile 'com.squareup:otto:1.3.6'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
+//    compile('com.daren.base:sea_monster:0.1.0'){
+//        exclude group: 'com.google.android',module:'support-v4'
+//    }
+
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+
+            repository(url: "file:///Users/daren/.m2/repository")
+            pom.groupId = "com.daren.base"
+            pom.version = '0.1.0'
+            pom.artifactId = 'ui'
+
+//            repository(url: uri('http://localhost:8081/nexus/content/repositories/thirdparty/')) {
+//                authentication(userName: 'admin', password: 'admin123')
+//            }
+//            snapshotRepository(url: uri('http://localhost:8081/nexus/content/repositories/thirdparty/')) {
+//                authentication(userName: 'admin', password: 'admin123')
+//            }
+        }
+    }
+}
+
