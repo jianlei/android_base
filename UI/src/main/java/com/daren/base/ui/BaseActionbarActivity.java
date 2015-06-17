@@ -82,7 +82,7 @@ public class BaseActionbarActivity extends SystemBarTintActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
-            mToolbar.setNavigationIcon(R.drawable.home_as_up_indicator);
+            mToolbar.setNavigationIcon(R.drawable.home_as_up_indicator_bg);
         } else {
 
         }
