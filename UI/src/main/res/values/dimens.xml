@@ -6,6 +6,6 @@
     <dimen name="sub_button_text_size">14sp</dimen>
     <dimen name="content_padding_title">5sp</dimen>
 
-    <dimen name="take_picture_width">92dp</dimen>
+    <dimen name="take_picture_width">60dp</dimen>
 
 </resources>

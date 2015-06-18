@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.daren.base.util.CaptureUtil;
 import com.daren.base.util.ImageUtil;
+import com.daren.base.util.ToastUtil;
 import com.daren.base.widget.WeightGridLayout;
 
 import java.util.ArrayList;
@@ -105,11 +106,15 @@ public abstract class CameraActivity extends BaseActionbarActivity {
         this.mCapturedImageURI = mCapturedImageURI;
     }
 
-    public abstract View getFlagView();
+    public abstract int getMaxPictures();
 
     protected abstract void takePicture();
 
     protected void doTakePicture(String filePath) {
+        if (getPictureHolders().size() == getMaxPictures()){
+            ToastUtil.show(this,getString(R.string.toast_max_picture,getMaxPictures()));
+            return;
+        }
         mCurrentPhotoPath = filePath;
         CaptureUtil.dispatchTakePictureIntent(this, filePath, TAKE_PICTURE_REQUEST_CODE);
     }
@@ -128,6 +133,7 @@ public abstract class CameraActivity extends BaseActionbarActivity {
             PictureHolder pictureHolder = new PictureHolder();
             pictureHolder.setBitmap(thumbnailBitmap);
             pictureHolder.setFilePath(mCurrentPhotoPath);
+            pictureHolder.setUri("file://" + mCurrentPhotoPath);
 
             imageLayoutAdpater.addPictureHolder(pictureHolder);
         }
@@ -190,6 +196,8 @@ public abstract class CameraActivity extends BaseActionbarActivity {
                     deleteFlagView.setVisibility(View.GONE);
                 }
                 final ImageView imageView = (ImageView) view.findViewById(R.id.image);
+                imageView.setTag(index + 1);
+                imageView.setOnClickListener(this);
                 imageView.setImageBitmap(pictureHolder.getBitmap());
                 imageView.setBackgroundColor(getResources().getColor(R.color.gray));
 
@@ -219,6 +227,19 @@ public abstract class CameraActivity extends BaseActionbarActivity {
                     this.isDeleteMode = false;
                 }
                 layoutView.notifyDataSetChanged();
+            }else if (v.getId() == R.id.image){
+                Intent intent = new Intent();
+                intent.setClass(CameraActivity.this, ImageShowActivity.class);
+
+                String[] uris = new String[datas.size()];
+                for (int i = 0; i < datas.size(); i++) {
+                    uris[i] = datas.get(i).getFilePath();
+                }
+
+                intent.putExtra(ImageShowActivity.Extra.IMAGES, uris);
+                intent.putExtra(ImageShowActivity.Extra.IMAGE_POSITION, (Integer) v.getTag());
+
+                startActivity(intent);
             }
         }
     }

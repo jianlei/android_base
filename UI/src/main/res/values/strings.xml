@@ -13,5 +13,6 @@
     <string name="xlistview_footer_no_more_msg">无更多消息</string>
     <string name="loading">加载中…</string>
     <string name="no_more_leave_tip">最多记录100条消息，每条消息最多可保存7天</string>
+    <string name="toast_max_picture">最多支持照片%1$s张</string>
 
 </resources>
