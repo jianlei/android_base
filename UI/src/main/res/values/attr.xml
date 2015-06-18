@@ -8,4 +8,9 @@
         <attr name="ptrScrollingWhileRefreshingEnabled" format="reference|boolean" />
         <attr name="ptrListViewExtrasEnabled" format="reference|boolean" />
     </declare-styleable>
+
+    <declare-styleable name="MyGridLayout">
+        <attr name="numColumns" format="integer" />
+        <attr name="itemMargin" format="integer" />
+    </declare-styleable>
 </resources>

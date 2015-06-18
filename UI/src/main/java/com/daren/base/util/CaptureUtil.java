@@ -4,16 +4,35 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.widget.Toast;
 
 import com.daren.base.ui.CameraActivity;
+
+import java.io.File;
 
 /**
  * Description: 打开调用照相机功能
  * Created by wangjianlei on 15/6/5.
  */
 public class CaptureUtil {
+
+    public static final String JPG_SUFFIX = "jpg";
+
+    public static void dispatchTakePictureIntent(Context context, String photoFilePath, int takePictureRequestCode) {
+        dispatchTakePictureIntent(context, new File(photoFilePath), takePictureRequestCode);
+    }
+
+    /**
+     * 打开相机进行拍照
+     * @param context
+     * @param photoFile
+     * @param takePictureRequestCode
+     */
+    public static void dispatchTakePictureIntent(Context context, File photoFile, int takePictureRequestCode) {
+        dispatchTakePictureIntent(context, Uri.fromFile(photoFile), takePictureRequestCode);
+    }
 
     /**
      * Start the camera by dispatching a camera intent.
@@ -41,5 +60,16 @@ public class CaptureUtil {
                     activity.getCapturedImageURI());
             activity.startActivityForResult(takePictureIntent, takePictureRequestCode);
         }
+    }
+
+
+
+
+    /**
+     * 获取sd卡路径
+     * @return
+     */
+    public static String getSdcardRoot() {
+        return Environment.getExternalStorageDirectory() + File.separator;
     }
 }

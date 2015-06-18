@@ -56,7 +56,14 @@ public class UpdateChecker extends Fragment {
         @Override
         public void handleMessage(Message msg) {
 
-            mUpdateCheckResultListener.handleVersionResult(msg.getData().getString("content"));
+            switch (msg.what){
+                case 100://失败
+                    mUpdateCheckResultListener.checkVersionException();
+                    break;
+                case 1:
+                    mUpdateCheckResultListener.checkVersionSuccess(msg.getData().getString("content"));
+                    break;
+            }
             super.handleMessage(msg);
         }
     };
@@ -77,12 +84,12 @@ public class UpdateChecker extends Fragment {
         this.mCookie = mCookie;
     }
 
-    public UpdateCheckResultListener getmUpdateCheckResultListener() {
+    public UpdateCheckResultListener getUpdateCheckResultListener() {
         return mUpdateCheckResultListener;
     }
 
-    public void setmUpdateCheckResultListener(UpdateCheckResultListener mUpdateCheckResultListener) {
-        this.mUpdateCheckResultListener = mUpdateCheckResultListener;
+    public void setUpdateCheckResultListener(UpdateCheckResultListener updateCheckResultListener) {
+        this.mUpdateCheckResultListener = updateCheckResultListener;
     }
 
     /**
@@ -153,6 +160,8 @@ public class UpdateChecker extends Fragment {
                 if (json != null) {
                     parseJson(json);
                 } else {
+                    mHandler.sendEmptyMessage(100);
+
                     Log.e(TAG, "can't get app update json");
                 }
                 //}

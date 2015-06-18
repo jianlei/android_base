@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by daren on 15/3/25.
@@ -149,4 +150,28 @@ public class Utils {
         context.startActivity(intent);
     }
 
+    /**
+     * 获取版本号码
+     * @param context
+     * @return
+     */
+    public static String getPackageVersionName(Context context){
+        try {
+            PackageManager manager = context.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            String version = info.versionName;
+            return version;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "1.0.0";
+        }
+    }
+
+    /**
+     * 获取一个唯一标示字符串
+     * @return
+     */
+    public static String getUuid(){
+        return UUID.randomUUID().toString();
+    }
 }

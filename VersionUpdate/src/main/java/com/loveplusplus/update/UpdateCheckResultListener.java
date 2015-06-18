@@ -9,5 +9,7 @@ public interface UpdateCheckResultListener {
      * 第三方应用在此方法中判断是否有新应用
      * @param versionContent
      */
-    void handleVersionResult(String versionContent);
+    void checkVersionSuccess(String versionContent);
+    void checkVersionException();
+
 }
