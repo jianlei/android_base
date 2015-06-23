@@ -14,5 +14,7 @@
     <string name="loading">加载中…</string>
     <string name="no_more_leave_tip">最多记录100条消息，每条消息最多可保存7天</string>
     <string name="toast_max_picture">最多支持照片%1$s张</string>
+    <string name="app_ok">确定</string>
+    <string name="app_cancel">取消</string>
 
 </resources>

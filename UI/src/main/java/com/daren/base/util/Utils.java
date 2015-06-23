@@ -9,10 +9,15 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -151,6 +156,18 @@ public class Utils {
     }
 
     /**
+     * 启动一个activity
+     * @param context
+     * @param kclass
+     */
+    public static void startActivity(Context context,Class kclass,Bundle bundle){
+        Intent intent = new Intent(context,kclass);
+        intent.putExtra("bundle",bundle);
+
+        context.startActivity(intent);
+    }
+
+    /**
      * 获取版本号码
      * @param context
      * @return
@@ -173,5 +190,30 @@ public class Utils {
      */
     public static String getUuid(){
         return UUID.randomUUID().toString();
+    }
+
+
+    public static String parseStringFromDate(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        return sdf.format(date);
+    }
+
+    public static Date parseDateFromString(String str){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        try {
+            return sdf.parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static DisplayMetrics getDisplayMetrics(Context context){
+        DisplayMetrics dm = new DisplayMetrics();
+
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        wm.getDefaultDisplay().getMetrics(dm);
+
+        return dm;
     }
 }

@@ -7,5 +7,7 @@
     <dimen name="content_padding_title">5sp</dimen>
 
     <dimen name="take_picture_width">60dp</dimen>
+    <dimen name="TitleTextSize">18dp</dimen>
+    <dimen name="LargeTextSize">16dp</dimen>
 
 </resources>

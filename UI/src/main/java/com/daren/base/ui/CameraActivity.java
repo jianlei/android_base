@@ -106,7 +106,9 @@ public abstract class CameraActivity extends BaseActionbarActivity {
         this.mCapturedImageURI = mCapturedImageURI;
     }
 
-    public abstract int getMaxPictures();
+    public int getMaxPictures(){
+        return 10;
+    }
 
     protected abstract void takePicture();
 
