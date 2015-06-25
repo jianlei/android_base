@@ -46,8 +46,10 @@ public class SystemBarTintActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && getTopBarView() != null) {
             setTranslucentStatus(true);
 
-            SystemBarTintManager.SystemBarConfig config = tintManager.getConfig();
-            getTopBarView().setPadding(0, config.getPixelInsetTop(false), 0, config.getPixelInsetBottom());
+//            SystemBarTintManager.SystemBarConfig config = tintManager.getConfig();
+//            getTopBarView().setPadding(0, config.getPixelInsetTop(false), 0, config.getPixelInsetBottom());
+
+
 //            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 //                    LinearLayout.LayoutParams.WRAP_CONTENT);
 //            lp.setMargins(0, config.getPixelInsetTop(false), 0, config.getPixelInsetBottom());

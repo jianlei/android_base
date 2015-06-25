@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.widget.Toast;
 
 import com.daren.base.ui.CameraActivity;
+import com.daren.base.ui.ImageShowActivity;
 
 import java.io.File;
 
@@ -26,6 +27,7 @@ public class CaptureUtil {
 
     /**
      * 打开相机进行拍照
+     *
      * @param context
      * @param photoFile
      * @param takePictureRequestCode
@@ -62,14 +64,25 @@ public class CaptureUtil {
         }
     }
 
-
-
-
     /**
      * 获取sd卡路径
+     *
      * @return
      */
     public static String getSdcardRoot() {
         return Environment.getExternalStorageDirectory() + File.separator;
+    }
+
+    public static void showPictures(Context context, String[] urls, int postion) {
+        if (postion < 0 || postion > urls.length) {
+            postion = 0;
+        }
+        Intent intent = new Intent();
+        intent.setClass(context, ImageShowActivity.class);
+
+        intent.putExtra(ImageShowActivity.Extra.IMAGES, urls);
+        intent.putExtra(ImageShowActivity.Extra.IMAGE_POSITION, postion);
+
+        context.startActivity(intent);
     }
 }

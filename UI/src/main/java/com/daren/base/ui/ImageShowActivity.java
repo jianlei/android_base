@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import java.io.File;
 
@@ -103,8 +104,14 @@ public class ImageShowActivity extends FragmentActivity {
 
 
             Uri uri = Uri.fromFile(new File(images[position]));
+            RequestCreator rc;
+            if(images[position].startsWith("http")){
+                rc = picasso.with(ImageShowActivity.this).load(images[position]);
+            }else {
+                rc = picasso.with(ImageShowActivity.this).load(new File(images[position]));
+            }
 
-            picasso.with(ImageShowActivity.this).load(new File(images[position])).into(imageView, new Callback() {
+            rc.into(imageView, new Callback() {
                 @Override
                 public void onSuccess() {
                     spinner.setVisibility(View.GONE);

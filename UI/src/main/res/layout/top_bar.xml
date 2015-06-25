@@ -1,13 +1,15 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/toolbar_ly"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:background="@color/status_bar_color"
-    >
+<!--<LinearLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:id="@+id/toolbar_ly"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:background="@color/status_bar_color"-->
+    <!-->-->
 
     <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar"
+        android:background="@color/status_bar_color"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         >
@@ -22,5 +24,5 @@
             android:textColor="@android:color/white"
             android:textSize="16sp"/>
     </android.support.v7.widget.Toolbar>
-</LinearLayout>
+<!--</LinearLayout>-->
 

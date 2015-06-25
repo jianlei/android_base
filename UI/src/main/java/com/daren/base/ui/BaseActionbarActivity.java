@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,7 +24,7 @@ import java.lang.reflect.Field;
 public class BaseActionbarActivity extends SystemBarTintActivity {
 
     private Toolbar mToolbar;
-    private LinearLayout mToolbarLy;
+//    private LinearLayout mToolbarLy;
     private LayoutInflater mInflater;
 
     //actionbar 标题
@@ -56,7 +55,7 @@ public class BaseActionbarActivity extends SystemBarTintActivity {
 
     @Override
     protected View getTopBarView() {
-        return mToolbarLy;
+        return mToolbar;
     }
 
     private void addToolBarAtTop() {
@@ -64,6 +63,7 @@ public class BaseActionbarActivity extends SystemBarTintActivity {
         Window win = getWindow();
         ViewGroup contentView = (ViewGroup) win.getDecorView().findViewById(android.R.id.content);
         ViewGroup rootView = (ViewGroup) contentView.getChildAt(0);
+        rootView.setFitsSystemWindows(true);
         if (rootView instanceof RelativeLayout){
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -78,7 +78,7 @@ public class BaseActionbarActivity extends SystemBarTintActivity {
      * 初始化toolbar
      */
     protected void initToolBar() {
-        mToolbarLy = (LinearLayout) findViewById(R.id.toolbar_ly);
+//        mToolbarLy = (LinearLayout) findViewById(R.id.toolbar_ly);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
