@@ -3,7 +3,6 @@ package com.daren.base.ui;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -24,7 +23,7 @@ import java.io.File;
  * <p/>
  * Created by wjl on 14-9-24.
  */
-public class ImageShowActivity extends FragmentActivity {
+public class ImageShowActivity extends SystemBarTintActivity {
 
     private static final String STATE_POSITION = "STATE_POSITION";
 
