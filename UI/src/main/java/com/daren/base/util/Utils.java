@@ -236,4 +236,23 @@ public class Utils {
         return (T) bundle.getSerializable(key);
     }
 
+
+    /**
+     * 通过包名获取应用程序的名称。
+     * @param context
+     *            Context对象。
+     * @return 返回包名所对应的应用程序的名称。
+     */
+    public static String getProgramNameByPackageName(Context context) {
+        PackageManager pm = context.getPackageManager();
+        String name = null;
+        try {
+            name = pm.getApplicationLabel(
+                    pm.getApplicationInfo(getAppPackageName(context),
+                            PackageManager.GET_META_DATA)).toString();
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return name;
+    }
 }
