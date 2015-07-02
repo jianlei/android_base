@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 
 /**
+ * 此类废弃，不要在使用了
  * Created by wjl on 14-4-8.
  */
+@Deprecated()
 public abstract class BaseActivity extends BaseActionbarActivity {
 
     private String token = null;

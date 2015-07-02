@@ -34,6 +34,7 @@ public class ImageShowActivity extends SystemBarTintActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_show);
 
+        initSystemBar();
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
         String[] imageUrls = bundle.getStringArray(Extra.IMAGES);
@@ -122,42 +123,7 @@ public class ImageShowActivity extends SystemBarTintActivity {
                 }
             });
 
-//            imageLoader.displayImage(images[position], imageView, options, new SimpleImageLoadingListener() {
-//                @Override
-//                public void onLoadingStarted(String imageUri, View view) {
-//                    spinner.setVisibility(View.VISIBLE);
-//                }
-//
-//                @Override
-//                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-//                    String message = null;
-//                    switch (failReason.getType()) {
-//                        case IO_ERROR:
-//                            message = "Input/Output error";
-//                            break;
-//                        case DECODING_ERROR:
-//                            message = "Image can't be decoded";
-//                            break;
-//                        case NETWORK_DENIED:
-//                            message = "Downloads are denied";
-//                            break;
-//                        case OUT_OF_MEMORY:
-//                            message = "Out Of Memory error";
-//                            break;
-//                        case UNKNOWN:
-//                            message = "Unknown error";
-//                            break;
-//                    }
-//                    Toast.makeText(ImageShowActivity.this, message, Toast.LENGTH_SHORT).show();
-//
-//                    spinner.setVisibility(View.GONE);
-//                }
-//
-//                @Override
-//                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-//                    spinner.setVisibility(View.GONE);
-//                }
-//            });
+
 
             view.addView(imageLayout, 0);
             return imageLayout;

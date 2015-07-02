@@ -147,6 +147,7 @@
     <color name="navy">#000080</color><!--海军色 -->
     <color name="black">#000000</color><!--黑色 -->
     <color name="cleangray">#dddddd</color><!-- 浅灰色 -->
-    <color name="status_bar_color">#0475e5</color><!-- 浅灰色 -->
+
+    <color name="status_bar_color">#0475e5</color>
 
 </resources>

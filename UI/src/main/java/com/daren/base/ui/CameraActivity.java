@@ -56,6 +56,11 @@ public abstract class CameraActivity extends BaseActionbarActivity {
     }
 
     @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         if (mCurrentPhotoPath != null) {
             savedInstanceState.putString(CAPTURED_PHOTO_PATH_KEY, mCurrentPhotoPath);

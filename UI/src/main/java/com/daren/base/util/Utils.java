@@ -216,4 +216,24 @@ public class Utils {
 
         return dm;
     }
+
+
+    /**
+     * 从intent bundle中获取指定key对应的对象值
+     *
+     * @param key
+     * @param type
+     * @param intent
+     * @param <T>
+     * @return
+     */
+    public static <T> T getObjectFromIntentBundle(String key, Class<T> type, Intent intent) {
+        if (intent == null)
+            return null;
+        Bundle bundle = intent.getBundleExtra("bundle");
+        if (bundle == null)
+            return null;
+        return (T) bundle.getSerializable(key);
+    }
+
 }

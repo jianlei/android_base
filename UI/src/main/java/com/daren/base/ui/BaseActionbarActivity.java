@@ -1,6 +1,7 @@
 package com.daren.base.ui;
 
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -63,7 +64,9 @@ public class BaseActionbarActivity extends SystemBarTintActivity {
         Window win = getWindow();
         ViewGroup contentView = (ViewGroup) win.getDecorView().findViewById(android.R.id.content);
         ViewGroup rootView = (ViewGroup) contentView.getChildAt(0);
-        rootView.setFitsSystemWindows(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
+            rootView.setFitsSystemWindows(true);
+        }
         if (rootView instanceof RelativeLayout){
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
