@@ -64,9 +64,9 @@ public class BaseActionbarActivity extends SystemBarTintActivity {
         Window win = getWindow();
         ViewGroup contentView = (ViewGroup) win.getDecorView().findViewById(android.R.id.content);
         ViewGroup rootView = (ViewGroup) contentView.getChildAt(0);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
-            rootView.setFitsSystemWindows(true);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
+//            rootView.setFitsSystemWindows(true);
+//        }
         if (rootView instanceof RelativeLayout){
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -100,7 +100,6 @@ public class BaseActionbarActivity extends SystemBarTintActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//禁止屏幕横屏显示
 //        addToolBarAtTop();
 //        mActionBar = getSupportActionBar();
 //

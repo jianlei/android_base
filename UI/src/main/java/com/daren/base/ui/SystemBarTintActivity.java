@@ -1,10 +1,12 @@
 package com.daren.base.ui;
 
 import android.annotation.TargetApi;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -21,6 +23,7 @@ public class SystemBarTintActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//禁止屏幕横屏显示
         super.onCreate(savedInstanceState);
     }
 
@@ -54,6 +57,12 @@ public class SystemBarTintActivity extends AppCompatActivity {
 //                    LinearLayout.LayoutParams.WRAP_CONTENT);
 //            lp.setMargins(0, config.getPixelInsetTop(false), 0, config.getPixelInsetBottom());
 //            getTopBarView().setLayoutParams(lp);
+        }
+        Window win = getWindow();
+        ViewGroup contentView = (ViewGroup) win.getDecorView().findViewById(android.R.id.content);
+        ViewGroup rootView = (ViewGroup) contentView.getChildAt(0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
+            rootView.setFitsSystemWindows(true);
         }
     }
 

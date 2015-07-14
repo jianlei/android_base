@@ -36,10 +36,6 @@ public class DarenLocationManager {
         mLocClient.registerLocationListener(myListener);
     }
 
-    public DarenLocationManager() {
-        super();
-    }
-
     /**
      * 设置定位参数
      */
@@ -48,7 +44,7 @@ public class DarenLocationManager {
         option.setLocationMode(LocationMode.Hight_Accuracy);// 设置定位模式
         option.setOpenGps(true);
         option.setIsNeedAddress(true);
-        option.setScanSpan(3000);
+        option.setScanSpan(5000);
         option.setCoorType("bd09ll");
         mLocClient.setLocOption(option);
     }
@@ -151,6 +147,8 @@ public class DarenLocationManager {
             Intent intent = new Intent(MESSAGE_LOCATION_SUCCESSED);
             mContext.sendBroadcast(intent);
         } else {
+            BusProvider.getInstance().post(new LocationChangeEvent());
+
             Intent intent = new Intent(MESSAGE_LOCATION_FAILED);
             mContext.sendBroadcast(intent);
         }

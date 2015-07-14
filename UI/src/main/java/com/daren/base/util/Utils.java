@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -194,12 +196,12 @@ public class Utils {
 
 
     public static String parseStringFromDate(Date date){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return sdf.format(date);
     }
 
     public static Date parseDateFromString(String str){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         try {
             return sdf.parse(str);
         } catch (ParseException e) {
@@ -235,6 +237,17 @@ public class Utils {
             return null;
         return (T) bundle.getSerializable(key);
     }
+
+    public static <T extends Parcelable> ArrayList<T> getArrayListFromIntentBundle(String key,
+                                                                        Class<ArrayList<T>> type, Intent intent) {
+        if (intent == null)
+            return null;
+        Bundle bundle = intent.getBundleExtra("bundle");
+        if (bundle == null)
+            return null;
+        return bundle.getParcelableArrayList(key);
+    }
+
 
 
     /**

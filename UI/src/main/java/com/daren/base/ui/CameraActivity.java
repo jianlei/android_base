@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,8 +36,13 @@ public abstract class CameraActivity extends BaseActionbarActivity {
     public static final int TAKE_PICTURE_REQUEST_CODE = 999;
 
     // Storage for camera image URI components
+    private final static String CAPTURED_PHOTO_PATHS = "mPhotoPaths";
+
     private final static String CAPTURED_PHOTO_PATH_KEY = "mCurrentPhotoPath";
     private final static String CAPTURED_PHOTO_URI_KEY = "mCapturedImageURI";
+
+    //缓存图片
+    private ArrayList<PictureHolder> mPictureHolders = new ArrayList<>();
 
     // Required for camera operations in order to save the image file on resume.
     private String mCurrentPhotoPath = null;
@@ -62,6 +69,9 @@ public abstract class CameraActivity extends BaseActionbarActivity {
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
+        if (mPictureHolders != null) {
+            savedInstanceState.putParcelableArrayList(CAPTURED_PHOTO_PATHS, mPictureHolders);
+        }
         if (mCurrentPhotoPath != null) {
             savedInstanceState.putString(CAPTURED_PHOTO_PATH_KEY, mCurrentPhotoPath);
         }
@@ -73,6 +83,9 @@ public abstract class CameraActivity extends BaseActionbarActivity {
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState.containsKey(CAPTURED_PHOTO_PATHS)) {
+            mPictureHolders = savedInstanceState.getParcelableArrayList(CAPTURED_PHOTO_PATHS);
+        }
         if (savedInstanceState.containsKey(CAPTURED_PHOTO_PATH_KEY)) {
             mCurrentPhotoPath = savedInstanceState.getString(CAPTURED_PHOTO_PATH_KEY);
         }
@@ -130,7 +143,6 @@ public abstract class CameraActivity extends BaseActionbarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == TAKE_PICTURE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 
-
             Bitmap oldBitmap = ImageUtil.getBitmapFromSize(mCurrentPhotoPath, 600, 600);
             //添加水印
             ImageUtil.waterMarkBitmap(mCurrentPhotoPath, oldBitmap, "");
@@ -142,7 +154,9 @@ public abstract class CameraActivity extends BaseActionbarActivity {
             pictureHolder.setFilePath(mCurrentPhotoPath);
             pictureHolder.setUri("file://" + mCurrentPhotoPath);
 
-            imageLayoutAdpater.addPictureHolder(pictureHolder);
+            mPictureHolders.add(pictureHolder);
+//            imageLayoutAdpater.addPictureHolder(pictureHolder);
+            imageLayoutAdpater.setDatas(mPictureHolders);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -167,6 +181,11 @@ public abstract class CameraActivity extends BaseActionbarActivity {
 
         public List<PictureHolder> getDatas() {
             return datas;
+        }
+
+        public void setDatas(List<PictureHolder> datas) {
+            this.datas = datas;
+            layoutView.notifyDataSetChanged();
         }
 
         public void addPictureHolder(PictureHolder pictureHolder) {
@@ -251,13 +270,14 @@ public abstract class CameraActivity extends BaseActionbarActivity {
         }
     }
 
-    public class PictureHolder {
+    public static class PictureHolder implements Parcelable {
         String uri;
         String fileName;
         String filePath;
 
         Bitmap bitmap;
         String mimeType;
+
 
         public String getUri() {
             return uri;
@@ -298,5 +318,40 @@ public abstract class CameraActivity extends BaseActionbarActivity {
         public void setMimeType(String mimeType) {
             this.mimeType = mimeType;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.uri);
+            dest.writeString(this.fileName);
+            dest.writeString(this.filePath);
+            dest.writeParcelable(this.bitmap, 0);
+            dest.writeString(this.mimeType);
+        }
+
+        public PictureHolder() {
+        }
+
+        protected PictureHolder(Parcel in) {
+            this.uri = in.readString();
+            this.fileName = in.readString();
+            this.filePath = in.readString();
+            this.bitmap = in.readParcelable(Bitmap.class.getClassLoader());
+            this.mimeType = in.readString();
+        }
+
+        public static final Parcelable.Creator<PictureHolder> CREATOR = new Parcelable.Creator<PictureHolder>() {
+            public PictureHolder createFromParcel(Parcel source) {
+                return new PictureHolder(source);
+            }
+
+            public PictureHolder[] newArray(int size) {
+                return new PictureHolder[size];
+            }
+        };
     }
 }
