@@ -141,7 +141,6 @@ public class WeightGridLayout extends ViewGroup {
         this.invalidate();
     }
 
-
     /**
      * 设置适配器
      */
@@ -163,7 +162,6 @@ public class WeightGridLayout extends ViewGroup {
 
                 @Override
                 public void onClick(View v) {
-                    // TODO Auto-generated method stub
                     click.onItemClick(v, index);
                 }
             });

@@ -1,7 +1,6 @@
 package com.daren.base.ui;
 
-import android.content.pm.ActivityInfo;
-import android.os.Build;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -24,6 +23,7 @@ import java.lang.reflect.Field;
  */
 public class BaseActionbarActivity extends SystemBarTintActivity {
 
+    protected Context mContext;
     private Toolbar mToolbar;
 //    private LinearLayout mToolbarLy;
     private LayoutInflater mInflater;
@@ -100,6 +100,7 @@ public class BaseActionbarActivity extends SystemBarTintActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
 //        addToolBarAtTop();
 //        mActionBar = getSupportActionBar();
 //

@@ -20,7 +20,6 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
  */
 public class SystemBarTintActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//禁止屏幕横屏显示

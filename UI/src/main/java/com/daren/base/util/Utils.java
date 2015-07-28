@@ -239,7 +239,7 @@ public class Utils {
     }
 
     public static <T extends Parcelable> ArrayList<T> getArrayListFromIntentBundle(String key,
-                                                                        Class<ArrayList<T>> type, Intent intent) {
+                                                                        Intent intent) {
         if (intent == null)
             return null;
         Bundle bundle = intent.getBundleExtra("bundle");
@@ -267,5 +267,40 @@ public class Utils {
             e.printStackTrace();
         }
         return name;
+    }
+
+    /**
+     * 遍历数组，把对象总相应的值拼接起来
+     *
+     * 类似于“a,b,c,d”
+     *
+     * @param delimiter
+     * @param tokens
+     * @param filedName
+     * @return
+     * @throws NoSuchFieldException
+     * @throws IllegalAccessException
+     */
+    public static String joinWithCertainFiled(CharSequence delimiter, Iterable tokens, String filedName) {
+        StringBuilder sb = new StringBuilder();
+        boolean firstTime = true;
+        try {
+            for (Object token : tokens) {
+                if (firstTime) {
+                    firstTime = false;
+                } else {
+                    sb.append(delimiter);
+                }
+
+
+                sb.append(Reflector.getValue(token, filedName));
+
+            }
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
     }
 }
