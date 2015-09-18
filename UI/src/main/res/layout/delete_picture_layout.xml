@@ -3,9 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:minHeight="45dp"
     android:gravity="center">
 
     <ImageView
+        android:clickable="true"
         android:id="@+id/delete_image_btn"
         android:layout_width="@dimen/take_picture_width"
         android:layout_height="@dimen/take_picture_width"

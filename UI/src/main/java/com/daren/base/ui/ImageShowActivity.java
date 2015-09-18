@@ -18,6 +18,8 @@ import com.squareup.picasso.RequestCreator;
 
 import java.io.File;
 
+import uk.co.senab.photoview.PhotoViewAttacher;
+
 /**
  * չʾͼƬ
  * <p/>
@@ -79,7 +81,7 @@ public class ImageShowActivity extends SystemBarTintActivity {
         public Object instantiateItem(ViewGroup view, int position) {
             View imageLayout = inflater.inflate(R.layout.image_show_item, view, false);
             assert imageLayout != null;
-            ImageView imageView = (ImageView) imageLayout.findViewById(R.id.image);
+            final ImageView imageView = (ImageView) imageLayout.findViewById(R.id.image);
             final ProgressBar spinner = (ProgressBar) imageLayout.findViewById(R.id.loading);
             final TextView index = (TextView) imageLayout.findViewById(R.id.index);
             index.setText(images.length + " - " + (position + 1));
@@ -87,7 +89,7 @@ public class ImageShowActivity extends SystemBarTintActivity {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ImageShowActivity.this.finish();
+//                    ImageShowActivity.this.finish();
                 }
             });
 
@@ -114,6 +116,8 @@ public class ImageShowActivity extends SystemBarTintActivity {
             rc.into(imageView, new Callback() {
                 @Override
                 public void onSuccess() {
+                    PhotoViewAttacher mAttacher = new PhotoViewAttacher(imageView);
+                    mAttacher.update();
                     spinner.setVisibility(View.GONE);
                 }
 
@@ -122,8 +126,6 @@ public class ImageShowActivity extends SystemBarTintActivity {
                     spinner.setVisibility(View.GONE);
                 }
             });
-
-
 
             view.addView(imageLayout, 0);
             return imageLayout;

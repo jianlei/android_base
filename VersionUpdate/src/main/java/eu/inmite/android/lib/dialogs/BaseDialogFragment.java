@@ -254,7 +254,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
             final int defaultButtonBackgroundColorFocused = res.getColor(R.color.sdl_button_focused_dark);
 
             final TypedArray a = mContext.getTheme().obtainStyledAttributes(null, R.styleable.DialogStyle, R.attr.sdlDialogStyle, 0);
-            mTitleTextColor = a.getColor(R.styleable.DialogStyle_titleTextColor, defaultTitleTextColor);
+            mTitleTextColor = a.getColor(R.styleable.DialogStyle_d_titleTextColor, defaultTitleTextColor);
             mTitleSeparatorColor = a.getColor(R.styleable.DialogStyle_titleSeparatorColor, defaultTitleSeparatorColor);
             mMessageTextColor = a.getColor(R.styleable.DialogStyle_messageTextColor, defaultMessageTextColor);
             mButtonTextColor = a.getColorStateList(R.styleable.DialogStyle_buttonTextColor);

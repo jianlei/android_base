@@ -8,6 +8,7 @@ public class LocationChangeEvent {
     private double lng;//经度
     private double lat;//纬度
     private String address;
+    private String time;//定位事件
 
     public String getAddress() {
         return address;
@@ -31,5 +32,13 @@ public class LocationChangeEvent {
 
     public void setLng(double lng) {
         this.lng = lng;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

@@ -3,6 +3,7 @@ package com.loveplusplus.update;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
 
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
@@ -17,7 +18,7 @@ public class Dialog extends SimpleDialogFragment {
 
     @Override
     public Builder build(Builder builder) {
-        Context context = getActivity().getApplicationContext();
+        final Context context = getActivity().getApplicationContext();
 
         builder.setTitle(context.getString(R.string.newUpdateAvailable));
         builder.setMessage(getArguments().getString(Constants.APK_UPDATE_CONTENT));
@@ -26,6 +27,7 @@ public class Dialog extends SimpleDialogFragment {
             @Override
             public void onClick(View v) {
                 goToDownload();
+                Toast.makeText(context, context.getString(R.string.downloading_hint), Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });

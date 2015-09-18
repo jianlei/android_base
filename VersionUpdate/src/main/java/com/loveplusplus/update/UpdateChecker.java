@@ -68,6 +68,8 @@ public class UpdateChecker extends Fragment {
         }
     };
 
+
+
     public String getVersionUrl() {
         return mVersionUrl;
     }

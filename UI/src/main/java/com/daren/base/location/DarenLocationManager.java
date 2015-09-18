@@ -18,7 +18,7 @@ import com.daren.base.util.BusProvider;
  */
 public class DarenLocationManager {
 
-    public static final String LOG = DarenLocationManager.class.getSimpleName();
+    public static final String LOG = DarenLocationManager.class.getSimpleName() + "wjl";
 
     public static final String MESSAGE_LOCATION_SUCCESSED = "MESSAGE_LOCATION_SUCCESSED";
     public static final String MESSAGE_LOCATION_FAILED = "MESSAGE_LOCATION_FAILED";
@@ -125,6 +125,7 @@ public class DarenLocationManager {
 
             event.setLat(location.getLatitude());
             event.setLng(location.getLongitude());
+            event.setTime(location.getTime());
 
             if (location.getLocType() == BDLocation.TypeGpsLocation) {
                 sb.append("\nspeed : ");

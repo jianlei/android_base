@@ -8,4 +8,11 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
 
+    <application>
+        <service
+            android:name="com.loveplusplus.update.DownloadService"
+            android:enabled="true"
+            android:process=":remote" >
+        </service>
+    </application>
 </manifest>

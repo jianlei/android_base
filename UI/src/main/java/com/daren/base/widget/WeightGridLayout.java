@@ -146,6 +146,7 @@ public class WeightGridLayout extends ViewGroup {
      */
     public void setGridAdapter(GridAdapter adapter) {
         this.adapter = adapter;
+        notifyDataSetChanged();
     }
 
     public interface OnItemClickListener {
